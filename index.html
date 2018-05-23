@@ -59,7 +59,7 @@
     });
     
     function render(){
-      let total;
+      let total = 0;
       ctx.clearRect(0,0, canvas.width, canvas.height);
       if(barArray.length > 30){
         barArray.shift();
@@ -68,10 +68,8 @@
         bar.draw();
         bar.update();
         total += -bar.height;
-        console.log(-bar.height);
-        console.log(total);
       });
-      // console.log(total);
+      console.log(total);
     }
 
     setInterval(render, 1000);
