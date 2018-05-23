@@ -19,7 +19,7 @@
 <body>
   <canvas id="canvas"></canvas>
   <div>
-    <span>Average memory usage: </span><p id="info"></p>
+    <span>Average memory usage: </span><p id="info"></p><span> %</span>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
   <script>
@@ -30,12 +30,17 @@
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = getColor();
+        // this.color = getColor();
       }
       draw(){
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.fillStyle = this.color;
+        let gradient = ctx.createLinearGradient(0,0,0,170);
+        gradient.addColorStop(0, '#355c7d');
+        gradient.addColorStop(0.5, '#6c5b7b');
+        gradient.addColorStop(1, '#c06c84');
+        ctx.fillStyle = gradient;
         ctx.fill();
         ctx.closePath();
       }
@@ -43,11 +48,7 @@
         this.x -= 11;
       }
     }
-    function getColor() {
-
-      return '#222222';
-    }
-
+    
     let barArray = [];
     let bar;
     let canvas = document.getElementById('canvas');
@@ -75,7 +76,7 @@
         bar.update();
         total += -bar.height;
       });
-      average = total / barArray.length;
+      average = (total / barArray.length).toPrecision(3);
       info.innerHTML = average;
     }
 
