@@ -67,10 +67,9 @@
       barArray.forEach((bar) => {
         bar.draw();
         bar.update();
-        total += bar.height;
-        console.log(bar.height);
+        total += -bar.height;
       });
-      // console.log(total);
+      console.log(total);
     }
 
     setInterval(render, 1000);
