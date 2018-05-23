@@ -13,17 +13,19 @@
 </head>
 <body>
   <canvas id="canvas"></canvas>
+  <div>
+    <p id="info"></p>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
-  <!-- <script src="http://localhost:8000/socket.io/socket.io.js"></script> -->
   <script>
-    console.log('hi');
+
     class Bar {
       constructor(x, y, width, height){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = getRandomColor();
+        this.color = getColor();
       }
       draw(){
         ctx.beginPath();
@@ -36,13 +38,9 @@
         this.x -= 11;
       }
     }
-    function getRandomColor() {
-      var letters = '0123456789ABCDEF';
-      var color = '#';
-      for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
+    function getColor() {
+
+      return '#222222';
     }
 
     let barArray = [];
@@ -58,10 +56,11 @@
       let height = data.message * 100;
       bar = new Bar(canvas.width,canvas.height, 10, -height);
       barArray.push(bar);
+
     });
     
-    function drawBars(){
-
+    function render(){
+      let total;
       ctx.clearRect(0,0, canvas.width, canvas.height);
       if(barArray.length > 30){
         barArray.shift();
@@ -69,10 +68,12 @@
       barArray.forEach((bar) => {
         bar.draw();
         bar.update();
+        total += bar.height;
       });
+      console.log(total);
     }
 
-    setInterval(drawBars, 1000);
+    setInterval(render, 1000);
 
   </script>
 </body>
