@@ -16,7 +16,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
   <!-- <script src="http://localhost:8000/socket.io/socket.io.js"></script> -->
   <script>
-    
+    console.log('hi');
     class Bar {
       constructor(x, y, width, height){
         this.x = x;
@@ -51,7 +51,7 @@
     canvas.width = 400;
     canvas.height = 400;
     let ctx = canvas.getContext('2d');
-    let socket = io.connect('http://localhost:8000');
+    let socket = io.connect('https://rocky-fjord-53501.herokuapp.com');
 
     //listen for events after connection
     socket.on('received', (data) => {
