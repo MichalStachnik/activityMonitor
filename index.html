@@ -56,7 +56,6 @@
       let height = data.message * 100;
       bar = new Bar(canvas.width,canvas.height, 10, -height);
       barArray.push(bar);
-
     });
     
     function render(){
@@ -69,8 +68,9 @@
         bar.draw();
         bar.update();
         total += bar.height;
+        console.log(bar.height);
       });
-      console.log(total);
+      // console.log(total);
     }
 
     setInterval(render, 1000);
