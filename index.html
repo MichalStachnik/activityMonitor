@@ -9,16 +9,21 @@
     canvas{
       border: 1px solid black;
     }
+    div{
+      display: inline-block;
+      position: absolute;
+      margin-left:10px;
+    }
   </style>
 </head>
 <body>
   <canvas id="canvas"></canvas>
   <div>
-    <p id="info"></p>
+    <span>Average memory usage: </span><p id="info"></p>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
   <script>
-
+    const info = document.getElementById('info');
     class Bar {
       constructor(x, y, width, height){
         this.x = x;
@@ -60,6 +65,7 @@
     
     function render(){
       let total = 0;
+      let average = 0;
       ctx.clearRect(0,0, canvas.width, canvas.height);
       if(barArray.length > 30){
         barArray.shift();
@@ -69,7 +75,8 @@
         bar.update();
         total += -bar.height;
       });
-      console.log(total);
+      average = total / barArray.length;
+      info.innerHTML = average;
     }
 
     setInterval(render, 1000);
