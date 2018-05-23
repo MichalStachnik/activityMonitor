@@ -28,7 +28,6 @@
       draw(){
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.width, this.height);
-        // ctx.fillStyle = "#0095DD";
         ctx.fillStyle = this.color;
         ctx.fill();
         ctx.closePath();
@@ -36,7 +35,6 @@
       update(){
         this.x -= 11;
       }
-      
     }
     function getRandomColor() {
       var letters = '0123456789ABCDEF';
@@ -46,6 +44,7 @@
       }
       return color;
     }
+
     let barArray = [];
     let bar;
     let canvas = document.getElementById('canvas');
@@ -54,30 +53,19 @@
     let ctx = canvas.getContext('2d');
     let socket = io.connect('http://localhost:8000');
 
-
     //listen for events after connection
     socket.on('received', (data) => {
-      console.log('recieved');
       let height = data.message * 100;
-      // console.log(data.message);
       bar = new Bar(canvas.width,canvas.height, 10, -height);
       barArray.push(bar);
     });
     
     function drawBars(){
-      // for(let bar in barArray){
-      //   console.log(barArray);
-      //   console.log(typeof bar);
-      // }
+
       ctx.clearRect(0,0, canvas.width, canvas.height);
       if(barArray.length > 30){
-        // barArray.splice(0,1);
         barArray.shift();
       }
-      // for(let i = 0; i < barArray.length; i++){
-      //   barArray[i].draw();
-      //   barArray[i].update();
-      // }
       barArray.forEach((bar) => {
         bar.draw();
         bar.update();
