@@ -25,13 +25,17 @@ let server =
   http
     .createServer(onRequest)
     .listen(port, () => console.log('listening on 8000'));
-    
+
 let io = socketIO(server);
 
 io.on('connection', (socket) => {
   console.log('CONNECTED', socket.id);
   setInterval(() => {
-    io.sockets.emit('received', {message: os.freemem() / os.totalmem()});
+    io.sockets.emit('received', 
+    {
+      freemem: os.freemem(),
+      totalmem: os.totalmem()
+    });
   }, 1000); 
 
 });
