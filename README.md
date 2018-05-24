@@ -1,2 +1,2 @@
 # activityMonitor
-An activity monitor for the server. Created with node, socket.io, and canvas.
+An activity monitor that watches the server's CPU usage using JavaScript. Created with node, socket.io, and canvas.
