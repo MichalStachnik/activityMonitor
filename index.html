@@ -45,10 +45,10 @@
       draw(){
         ctx.beginPath();
         ctx.rect(this.x, this.y, this.width, this.height);
-        let gradient = ctx.createLinearGradient(0,0,0,this.height);
-        gradient.addColorStop(0, '#355c7d');
+        let gradient = ctx.createLinearGradient(0,0,0,canvas.height);
+        gradient.addColorStop(0, '#c06c84');
         gradient.addColorStop(0.5, '#6c5b7b');
-        gradient.addColorStop(1, '#c06c84');
+        gradient.addColorStop(1, '#355c7d');
         ctx.fillStyle = gradient;
         ctx.fill();
         ctx.closePath();
