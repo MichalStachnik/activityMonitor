@@ -33,7 +33,15 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
   <script>
+
     const info = document.getElementById('info');
+    const canvas = document.getElementById('canvas');
+    canvas.width = 400;
+    canvas.height = 200;
+    const ctx = canvas.getContext('2d');
+    let barArray = [];
+    let socket = io.connect('https://rocky-fjord-53501.herokuapp.com');
+
     class Bar {
       constructor(x, y, width, height){
         this.x = x;
@@ -57,34 +65,19 @@
         this.x -= 11;
       }
     }
-
-    let barArray = [];
-    let bar;
-    let canvas = document.getElementById('canvas');
-    canvas.width = 400;
-    canvas.height = 400;
-    let ctx = canvas.getContext('2d');
-    let socket = io.connect('https://rocky-fjord-53501.herokuapp.com');
-    let i = 0;
     //listen for events after connection
     socket.on('received', (data) => {
-      i++;
-      console.log('received from server ', i);
       info.innerHTML = (data.freemem / data.totalmem).toPrecision(3);
       let height = (data.freemem / data.totalmem) * 500;
-      bar = new Bar(canvas.width,canvas.height, 10, -height);
-      if(barArray.length > 30){
-        barArray.shift();
-      }
+      let bar = new Bar(canvas.width,canvas.height, 10, -height);
       barArray.push(bar);
-      console.log(barArray.length);
     });
     
     function render(){
       ctx.clearRect(0,0, canvas.width, canvas.height);
-      // if(barArray.length > 30){
-      //   barArray.shift();
-      // }
+      if(barArray.length > 30){
+        barArray.shift();
+      }
       barArray.forEach((bar) => {
         bar.draw();
         bar.update();
