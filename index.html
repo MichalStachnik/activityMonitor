@@ -71,15 +71,18 @@
       info.innerHTML = (data.freemem / data.totalmem).toPrecision(3);
       let height = (data.freemem / data.totalmem) * 500;
       bar = new Bar(canvas.width,canvas.height, 10, -height);
+      if(barArray.length > 30){
+        barArray.shift();
+      }
       barArray.push(bar);
       console.log(barArray.length);
     });
     
     function render(){
       ctx.clearRect(0,0, canvas.width, canvas.height);
-      if(barArray.length > 30){
-        barArray.shift();
-      }
+      // if(barArray.length > 30){
+      //   barArray.shift();
+      // }
       barArray.forEach((bar) => {
         bar.draw();
         bar.update();
