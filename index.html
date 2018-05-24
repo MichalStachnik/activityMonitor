@@ -65,9 +65,11 @@
     canvas.height = 400;
     let ctx = canvas.getContext('2d');
     let socket = io.connect('https://rocky-fjord-53501.herokuapp.com');
-
+    let i = 0;
     //listen for events after connection
     socket.on('received', (data) => {
+      i++;
+      console.log('received from server ', i);
       info.innerHTML = (data.freemem / data.totalmem).toPrecision(3);
       let height = (data.freemem / data.totalmem) * 500;
       bar = new Bar(canvas.width,canvas.height, 10, -height);
