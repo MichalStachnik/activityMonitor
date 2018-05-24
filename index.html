@@ -68,7 +68,7 @@
 
     //listen for events after connection
     socket.on('received', (data) => {
-      let height = data.message * 100;
+      let height = data.message * 400;
       bar = new Bar(canvas.width,canvas.height, 10, -height);
       barArray.push(bar);
     });
@@ -88,9 +88,7 @@
       average = (total / barArray.length).toPrecision(3);
       info.innerHTML = average;
     }
-
     setInterval(render, 1000);
-
   </script>
 </body>
 </html>
