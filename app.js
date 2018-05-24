@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
       freemem: os.freemem(),
       totalmem: os.totalmem()
     });
-  }, 1000); 
+  }, 2000); 
 
 });
 
